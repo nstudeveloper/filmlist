@@ -1,0 +1,43 @@
+<div class="col-lg-11">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Actors</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for film in films %}
+            <tr>
+                <td>
+                    {{ film.title }}
+                </td>
+                <td>
+                    {% for actor in film.actor %}
+                        <a href="{{ path('film_showbyactorid', { 'id': actor.id }) }}">{{ actor.firstName~' '~actor.lastName }}</a>  </br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for category in film.category %}
+                        {{ category.name }} </br>
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('film_show', { 'id': film.id }) }}">show</a>
+                    <a href="{{ path('film_edit', { 'id': film.id }) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if is_granted("ROLE_ADMIN") %}
+        <a href="{{ path('film_new') }}" class="btn btn-primary custom-btn">Create a new film</a>
+    {% endif %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(films) }}
+    </div>
+</div>

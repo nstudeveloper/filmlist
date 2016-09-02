@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phingTest" default="hello_world" basedir=".">
+    <property name="src_dir" value="protected/" override="false"/>
+    <property name="res_dir" value="public/" override="false"/>
+
+    <property name="DEPLOY_DIR" value="deploy" />
+    <property name="IMG_DIR" value="images" />
+    <property name="CSS_DIR" value="web/css/*.css" />
+    <property name="LIB_DIR" value="lib" />
+
+
+    <target name="hello_world">
+        <echo>Script is here</echo>
+    </target>
+
+    <target name="minify_exec">
+        <exec command="lessc ${project.basedir}/${src_dir}/${current_file} > ${project.basedir}/${src_dir}/${current_file}.css" />
+    </target>
+
+    <target name="minify_js_css">
+        <echo>Минификация js css</echo>
+        <foreach param="current_file" target="minify_exec">
+            <fileset dir="${src_dir}/">
+                <include name="**/assets/css/*.less" />
+            </fileset>
+        </foreach>
+    </target>
+
+</project>
+
+<!--<project name="make_project" basedir=".." default="build">-->
+    <!--<property name="src_dir" value="protected/" override="false"/>-->
+    <!--<property name="res_dir" value="public/" override="false"/>-->
+
+    <!--<target name="clear_cache_dir">-->
+        <!--<echo>Устанавливаем права на папку cache 777</echo>-->
+        <!--<chown file="composer.phar" user="$USER"/>-->
+        <!--&lt;!&ndash;<chmod file="filmlist/app/cache" mode="0777" />&ndash;&gt;-->
+        <!--<echo>Очищаем директории кэша</echo>-->
+        <!--<delete>-->
+            <!--<fileset dir="${project.basedir}/filmlist/app/cache/">-->
+                <!--<include name="**"/>-->
+            <!--</fileset>-->
+        <!--</delete>-->
+    <!--</target>-->
+
+    <!--<target name="build" depends="clear_cache_dir">-->
+    <!--</target>-->
+<!--</project>-->

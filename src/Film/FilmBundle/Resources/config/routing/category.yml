@@ -1,0 +1,24 @@
+category_index:
+    path:     /
+    defaults: { _controller: "FilmBundle:Category:index" }
+    methods:  GET
+
+category_list:
+    path:     /list
+    defaults: { _controller: "FilmBundle:Category:list" }
+    methods:  GET
+
+category_new:
+    path:     /new
+    defaults: { _controller: "FilmBundle:Category:new" }
+    methods:  [GET, POST]
+
+category_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FilmBundle:Category:edit" }
+    methods:  [GET, POST]
+
+category_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FilmBundle:Category:delete" }
+    methods:  DELETE

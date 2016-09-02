@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Film</h1>
+
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            ID
+        </div>
+        <div class="col-lg-9">
+            {{ film.id }}
+        </div>
+    </div>
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            Title
+        </div>
+        <div class="col-lg-9">
+            {{ film.title }}
+        </div>
+    </div>
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            Description
+        </div>
+        <div class="col-lg-9">
+            {{ film.description }}
+        </div>
+    </div>
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            Image
+        </div>
+        <div class="col-lg-9">
+            <img width="100" src="{{ asset('uploads/images/'~film.image) }}" alt="">
+        </div>
+    </div>
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            Actors
+        </div>
+        <div class="col-lg-9">
+            {% for actor in film.actor %}
+                {{ actor.firstName~' '~actor.lastName }} </br>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row filmlist">
+        <div class="col-lg-3">
+            Categories
+        </div>
+        <div class="col-lg-9">
+            {% for category in film.category %}
+                {{ category.name }}</br>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <a href="{{ path('film_index') }}" class="btn btn-primary custom-btn">Back to the list</a>
+    <a href="{{ path('film_edit', { 'id': film.id }) }}" class="btn btn-primary custom-btn">Edit</a>
+
+    {{ form_start(delete_form) }}
+    <input type="submit" class="custom-btn btn-danger btn" value="Delete">
+    {{ form_end(delete_form) }}
+
+{% endblock %}

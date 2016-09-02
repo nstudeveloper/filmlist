@@ -1,0 +1,20 @@
+film_film:
+    resource: "@FilmBundle/Resources/config/routing/film.yml"
+    prefix:   /film
+
+film_category:
+    resource: "@FilmBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+
+film_actor:
+    resource: "@FilmBundle/Resources/config/routing/actor.yml"
+    prefix:   /actor
+
+film_form:
+    resource: "@FilmBundle/Resources/config/routing/form.yml"
+    prefix:   /form
+
+film_list:
+    path:     /
+    defaults: { _controller: "FilmBundle:Default:index" }
+    methods:  GET

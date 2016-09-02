@@ -1,0 +1,8 @@
+{% block body %}
+    <h1>Category list</h1>
+    {% for category in categories %}
+        <div>
+            <a href="{{ path('film_showbycategoryid', { 'id': category.id }) }}">{{ category.name }}</a>
+        </div>
+    {% endfor %}
+{% endblock %}

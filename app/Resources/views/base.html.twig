@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" ; charset=utf-8"/>
+    <title>{% block title %}Film list{% endblock %}</title>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block stylesheets %}
+        {% stylesheets 'css/*' %}
+        <link href="{{ asset_url }}" rel="stylesheet" media="screen"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Film list</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ path('film_index') }}">Home</a></li>
+                <li><a href="{{ path('category_index') }}">Categories</a></li>
+                <li><a href="{{ path('actor_index') }}">Actors</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<section id="wrapper">
+
+    <div class="col-lg-3">
+        <aside class="sidebar">
+            {% block sidebar %}{% endblock %}
+        </aside>
+    </div>
+
+    <div class="col-lg-6">
+        <section class="main-col">
+            {% block body %}{% endblock %}
+        </section>
+    </div>
+
+
+    <div id="footer">
+        {% block footer %}
+        {% endblock %}
+    </div>
+
+</section>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

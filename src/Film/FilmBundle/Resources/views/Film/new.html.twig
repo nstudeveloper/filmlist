@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Film creation</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.image) }}
+    <input type="submit" value="Create" class="btn btn-success custom-btn"/>
+    {{ form_end(form) }}
+
+    <a href="{{ path('film_index') }}" class="btn btn-primary custom-btn">Back to the list</a>
+
+{% endblock %}

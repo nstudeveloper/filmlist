@@ -1,0 +1,3 @@
+form_index:
+    path:     /
+    defaults: { _controller: "FilmBundle:FormExample:index" }

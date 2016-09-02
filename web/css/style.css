@@ -1,0 +1,8 @@
+.filmlist {
+    border-bottom: 1px #000 solid;
+    padding: 10px 0;
+}
+.custom-btn{
+    margin: 10px;
+    display: inline-block;
+}
