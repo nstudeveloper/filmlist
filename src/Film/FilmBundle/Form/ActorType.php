@@ -16,10 +16,9 @@ class ActorType extends AbstractType
     {
         $builder
             ->add('firstName')
-            ->add('lastName')
-        ;
+            ->add('lastName');
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

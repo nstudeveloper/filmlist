@@ -27,7 +27,8 @@
         "symfony/assetic-bundle": "dev-master",
         "guzzlehttp/guzzle": "~5.0",
         "friendsofsymfony/rest-bundle": "dev-master",
-        "jms/serializer-bundle": "^1.1"
+        "jms/serializer-bundle": "^1.1",
+        "liip/imagine-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

@@ -28,7 +28,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/film/category, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/film/actor, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/actor, role: ROLE_ADMIN }
-        - { path: ^/category, role: ROLE_ADMIN }
-        - { path: ^/film, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_USER }
+        - { path: ^/actor, role: ROLE_USER }
+        - { path: ^/category, role: ROLE_USER }
+        - { path: ^/film, role: ROLE_USER}

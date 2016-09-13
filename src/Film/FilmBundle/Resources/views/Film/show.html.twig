@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <h1>Film</h1>
 
     <div class="row filmlist">
@@ -32,7 +33,11 @@
             Image
         </div>
         <div class="col-lg-9">
-            <img width="100" src="{{ asset('uploads/images/'~film.image) }}" alt="">
+            {% if asset_exists(asset('uploads/images/'~film.image)) %}
+                <img src="{{ asset('uploads/images/'~film.image) | imagine_filter('my_thumb') }}" alt=""/>
+            {% else %}
+                <p>Nothing</p>
+            {% endif %}
         </div>
     </div>
     <div class="row filmlist">

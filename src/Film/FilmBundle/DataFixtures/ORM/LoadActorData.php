@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rtonkih
- * Date: 25.08.16
- * Time: 12:38
- */
 
 namespace Film\FilmBundle\DataFixtures\ORM;
 

@@ -1,11 +1,8 @@
 {% extends '::base.html.twig' %}
 {% block stylesheets %}
     {{ parent () }}
-    {% stylesheets '@FilmBundle/Resources/public/css/*' %}
-    <link href="{{ asset_url }}" rel="stylesheet" media="screen"/>
-    {% endstylesheets %}
-{% endblock %}
 
+{% endblock %}
 
 {% block sidebar %}
     {{ render(controller('FilmBundle:Category:list' )) }}

@@ -5,7 +5,9 @@
             <th>Title</th>
             <th>Actors</th>
             <th>Category</th>
-            <th>Actions</th>
+            {% if is_granted('ROLE_USER') %}
+                <th>Actions</th>
+            {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -24,16 +26,18 @@
                         {{ category.name }} </br>
                     {% endfor %}
                 </td>
-                <td>
-                    <a href="{{ path('film_show', { 'id': film.id }) }}">show</a>
-                    <a href="{{ path('film_edit', { 'id': film.id }) }}">edit</a>
-                </td>
+                {% if is_granted('ROLE_USER') %}
+                    <td>
+                        <a href="{{ path('film_show', { 'id': film.id }) }}">show</a>
+                        <a href="{{ path('film_edit', { 'id': film.id }) }}">edit</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    {% if is_granted("ROLE_ADMIN") %}
+    {% if is_granted("ROLE_USER") %}
         <a href="{{ path('film_new') }}" class="btn btn-primary custom-btn">Create a new film</a>
     {% endif %}
 

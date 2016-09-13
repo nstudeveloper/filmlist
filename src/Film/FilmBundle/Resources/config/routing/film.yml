@@ -21,7 +21,7 @@ film_edit:
 film_delete:
     path:     /{id}/delete
     defaults: { _controller: "FilmBundle:Film:delete" }
-    methods:  DELETE
+    methods:  POST
 
 film_showbycategoryid:
     path:     /category/{id}

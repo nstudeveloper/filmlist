@@ -18,18 +18,17 @@ class FilmType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-            ->add('category','entity',[
+            ->add('category', 'entity', [
                 'class' => 'FilmBundle:Category',
                 'multiple' => true
             ])
-            ->add('actor','entity',[
+            ->add('actor', 'entity', [
                 'class' => 'FilmBundle:Actor',
                 'multiple' => true
             ])
-            ->add('image', FileType::class, ['label' => 'upload image', 'data_class' => null])
-        ;
+            ->add('image', FileType::class, ['label' => 'upload image', 'data_class' => null, 'required' => false]);
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

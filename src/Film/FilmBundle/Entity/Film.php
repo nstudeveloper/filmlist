@@ -3,6 +3,7 @@
 namespace Film\FilmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -50,7 +51,16 @@ class Film
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank(message="Please, upload the image.")
+     * @Assert\File(
+     *     maxSize = "2M",
+     *    mimeTypes = {
+     *          "image/png",
+     *          "image/jpeg",
+     *          "image/jpg",
+     *          "image/gif",
+     *      },
+     *     mimeTypesMessage = "Please upload a valid image"
+     * )
      */
     private $image;
 
@@ -219,5 +229,15 @@ class Film
     public function getActor()
     {
         return $this->actor;
+    }
+
+    public function isExist()
+    {
+        $fs = new Filesystem();
+        if ($fs->exists($this->getImage())) {
+            return false;
+        }
+
+        return true;
     }
 }

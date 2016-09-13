@@ -4,18 +4,21 @@ namespace Film\FilmBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Film\FilmBundle\Entity\Actor;
 use Film\FilmBundle\Form\ActorType;
 
 class ActorController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $actors = $em->getRepository('FilmBundle:Actor')->findAll();
+
+        $actors = $this->get('knp_paginator')
+            ->paginate(
+                $actors, $request->query->getInt('page', 1), 3
+            );
 
         return $this->render('FilmBundle:Actor:index.html.twig', array(
             'actors' => $actors,
@@ -33,7 +36,9 @@ class ActorController extends Controller
             $em->persist($actor);
             $em->flush();
 
-            return $this->redirectToRoute('actor_show', array('id' => $actor->getId()));
+            $this->get('session')->getFlashBag()->add('info', 'Actor was successful created');
+
+            return $this->redirectToRoute('actor_index');
         }
 
         return $this->render('FilmBundle:Actor:new.html.twig', array(
@@ -53,7 +58,9 @@ class ActorController extends Controller
             $em->persist($actor);
             $em->flush();
 
-            return $this->redirectToRoute('actor_index', array('id' => $actor->getId()));
+            $this->get('session')->getFlashBag()->add('info', 'Actor was successful edited');
+
+            return $this->redirectToRoute('actor_index');
         }
 
         return $this->render('FilmBundle:Actor:edit.html.twig', array(
@@ -73,6 +80,8 @@ class ActorController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($actor);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('info', 'Actor was successful deleted');
         }
 
         return $this->redirectToRoute('actor_index');
@@ -82,7 +91,7 @@ class ActorController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('actor_delete', array('id' => $actor->getId())))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->getForm();
     }
 }

@@ -6,10 +6,10 @@ use Doctrine\ORM\EntityRepository;
 
 class CategoryRepository extends EntityRepository
 {
-    public function categoryById($id){
-        return $this->createQueryBuilder('e')
-            ->where('e.id = :id')
-            ->setParameter('id', $id)
+    public function getCategories($limit)
+    {
+        return $this->createQueryBuilder('c')
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

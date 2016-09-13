@@ -16,4 +16,4 @@ actor_edit:
 actor_delete:
     path:     /{id}/delete
     defaults: { _controller: "FilmBundle:Actor:delete" }
-    methods:  DELETE
+    methods:  POST

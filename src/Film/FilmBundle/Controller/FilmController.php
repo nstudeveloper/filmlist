@@ -4,10 +4,7 @@ namespace Film\FilmBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Film\FilmBundle\Entity\Film;
-use Film\FilmBundle\Form\FilmType;
 
 class FilmController extends Controller
 {
@@ -31,18 +28,22 @@ class FilmController extends Controller
         $film = new Film();
         $form = $this->createForm('Film\FilmBundle\Form\FilmType', $film);
         $form->handleRequest($request);
+        $imageDir = $this->container->getParameter('images_directory');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $film->getImage();
-            $fileName = $this->get('film.image_uploader')->upload($file);
-
-            $film->setImage($fileName);
+            if ($file != null) {
+                $fileName = $this->get('film.image_uploader')->upload($file, $imageDir);
+                $film->setImage($fileName);
+            }
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($film);
             $em->flush();
 
-            return $this->redirectToRoute('film_show', array('id' => $film->getId()));
+            $this->get('session')->getFlashBag()->add('info', 'New film created successful');
+
+            return $this->redirectToRoute('film_index', array('id' => $film->getId()));
         }
 
         return $this->render('FilmBundle:Film:new.html.twig', array(
@@ -77,6 +78,8 @@ class FilmController extends Controller
             $em->persist($film);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('info', 'Film was successful edited');
+
             return $this->redirectToRoute('film_index', array('id' => $film->getId()));
         }
 
@@ -96,6 +99,8 @@ class FilmController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->remove($film);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('info', 'Film was successful deleted');
         }
 
         return $this->redirectToRoute('film_index');
@@ -105,7 +110,7 @@ class FilmController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('film_delete', array('id' => $film->getId())))
-            ->setMethod('DELETE')
+            ->setMethod('POST')
             ->getForm();
     }
 
